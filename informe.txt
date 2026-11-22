@@ -1,0 +1,69 @@
+Laboratorio de eficiencia en Python - Unidad 4
+
+Paul Garcia | Algoritmos y Estructuras de Datos<br/>22 de noviembre de 2026 | Valor de la actividad: 9 puntos
+
+Repositorio: <link href="https://github.com/PaulG250/Garcia_Paul_AlgEstDatos_U4">https://github.com/PaulG250/Garcia_Paul_AlgEstDatos_U4</link>
+
+R1. Análisis teórico previo
+
+Predicción registrada en analisis_previo.txt antes de medir; se conserva sin cambios. El espacio indicado es auxiliar y excluye la entrada.
+
+Selección: tiempo Θ(n²) en todos los casos: compara cada posición con las restantes, n(n-1)/2 comparaciones. Espacio O(1), pues intercambia en la misma lista. Razón esperada al duplicar n: aproximadamente 4.
+
+Merge Sort: tiempo Θ(n log₂ n): mezcla O(n) elementos por nivel durante log₂ n niveles. Espacio O(n) por las listas auxiliares, que domina la pila O(log n). Razones esperadas: 2,20; 2,18; 2,17.
+
+Lineal iterativa: mejor caso Θ(1), promedio y peor Θ(n); espacio O(1). Buscar -1 en datos positivos exige recorrer toda la lista. Razones esperadas: 2; 2; 2.
+
+Binaria iterativa: mejor caso Θ(1), promedio/peor O(log₂ n); espacio O(1) al usar índices. Reduce el intervalo a la mitad. Razones esperadas: 1,10; 1,09; 1,08. Se excluye el coste del ordenamiento previo con Merge Sort.
+
+Método y validación
+
+Semilla 42; enteros aleatorios entre 1 y 1.000.000. Ambos ordenamientos reciben copias de los mismos datos, hechas fuera del cronómetro. Se informa la mediana de cinco repeticiones con time.perf_counter(). Ambas búsquedas usan la misma lista ordenada y el objetivo ausente -1; se miden lotes de 2.000 consultas y se divide por ese total. Validación separada: 77 listas, con casos vacíos, repetidos, negativos y búsquedas presentes/ausentes.
+
+La Tabla 16 de la Clase 12 predice al duplicar n: O(n²), ≈4; O(n log n), algo más de 2; O(n), ≈2; O(log n), apenas mayor que 1. Coincide con R1. Las razones usan T(2n)/T(n); para Merge Sort, 2 log₂(2n)/log₂ n, y para binaria, log₂(2n)/log₂ n.
+
+R4. Tiempos reales y contraste empírico
+
+Segundos por ejecución; en búsquedas, por consulta. La razón compara tamaños consecutivos del mismo algoritmo. "-" indica que no hay tamaño previo.
+
+Seleccion | 1000 | 0.013565900 | -
+
+Seleccion | 2000 | 0.052571500 | 3.875
+
+Seleccion | 4000 | 0.211629200 | 4.026
+
+Seleccion | 8000 | 6.692317200 | 31.623
+
+Merge Sort | 1000 | 0.001161000 | -
+
+Merge Sort | 2000 | 0.002503500 | 2.156
+
+Merge Sort | 4000 | 0.006021800 | 2.405
+
+Merge Sort | 8000 | 0.075996300 | 12.620
+
+Lineal | 1000 | 0.000027654 | -
+
+Lineal | 2000 | 0.000057910 | 2.094
+
+Lineal | 4000 | 0.000463528 | 8.004
+
+Lineal | 8000 | 0.001622434 | 3.500
+
+Binaria | 1000 | 0.000000674 | -
+
+Binaria | 2000 | 0.000000766 | 1.137
+
+Binaria | 4000 | 0.000004932 | 6.439
+
+Binaria | 8000 | 0.000005997 | 1.216
+
+Seleccion: 3.88; 4.03; 31.62 frente a 4.00; 4.00; 4.00. Las primeras dos razones se acercan a 4; la tercera se desvía mucho. Las comparaciones siguen siendo cuadráticas. La carga o frecuencia del procesador son posibles causas del salto.
+
+Merge Sort: 2.16; 2.41; 12.62 frente a 2.20; 2.18; 2.17. Las primeras dos se acercan al crecimiento esperado; la tercera se dispara. El salto simultáneo en otros algoritmos sugiere interferencia del sistema, sin demostrar su causa.
+
+Lineal: 2.09; 8.00; 3.50 frente a 2.00; 2.00; 2.00. La primera se acerca a 2; la segunda y tercera exceden lo esperado. Los saltos no confirman el crecimiento teórico. La interferencia del sistema es una posible explicación.
+
+Binaria: 1.14; 6.44; 1.22 frente a 1.10; 1.09; 1.08. La primera y tercera se acercan al crecimiento lento; la segunda se dispara. Los pasos enteros, costes fijos y ruido afectan consultas tan breves; el salto simultáneo sugiere carga externa.
+
+Se conservó una primera ejecución con saltos simultáneos en varios algoritmos (resultados_primera_ejecucion.csv) y se repitió el experimento completo. La tabla presenta la segunda ejecución, sin escoger muestras individuales. Una medición finita no demuestra una cota asintótica.

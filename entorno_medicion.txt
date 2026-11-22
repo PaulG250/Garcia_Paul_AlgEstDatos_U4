@@ -1,0 +1,3 @@
+Python 3.12.14
+Windows-11-10.0.26300-SP0
+Semilla 42; 5 repeticiones; 2000 consultas por lote.
