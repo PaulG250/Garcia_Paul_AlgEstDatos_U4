@@ -1,0 +1,34 @@
+R1. Predicción teórica registrada antes de ejecutar las mediciones
+
+Se medirán listas aleatorias de 1.000, 2.000, 4.000 y 8.000 enteros.
+La complejidad espacial indicada es auxiliar: excluye la entrada.
+
+Selección: tiempo Θ(n²) en todos los casos, pues compara cada posición
+con todas las restantes: n(n-1)/2 comparaciones. Espacio O(1), porque
+intercambia valores en la misma lista. Al duplicar n espero una razón ≈4.
+
+Merge Sort: tiempo Θ(n log₂ n) en todos los casos: divide en dos mitades
+y mezcla en tiempo lineal durante log₂ n niveles. Espacio O(n) por las
+listas auxiliares; la pila O(log n) queda dominada por ellas. Espero razones
+2 log₂(2n)/log₂(n), aproximadamente 2,20; 2,18; 2,17.
+
+Búsqueda lineal iterativa: mejor caso Θ(1); promedio y peor caso Θ(n).
+Espacio O(1). Se buscará -1, ausente en las listas positivas, para recorrer
+siempre n elementos (peor caso). Espero razones ≈2.
+
+Búsqueda binaria iterativa: mejor caso Θ(1); promedio y peor caso
+O(log₂ n). Espacio O(1), porque usa índices sin crear sublistas.
+Se buscará -1 en la misma lista previamente ordenada con Merge Sort,
+sin incluir el ordenamiento en el tiempo de búsqueda. Espero razones
+log₂(2n)/log₂(n), aproximadamente 1,10; 1,09; 1,08. Estas son referencias
+asintóticas: la cantidad entera de pasos, los costes fijos y el ruido
+pueden producir diferencias, sobre todo en búsquedas muy cortas.
+
+Método previsto: semilla fija, mismos datos para los dos ordenamientos,
+copias fuera del cronómetro, cinco repeticiones y mediana. Las búsquedas
+se medirán en lotes de 2.000 consultas y se informará tiempo por consulta.
+La creación de datos, el ordenamiento previo y la validación quedan fuera
+de los tiempos informados. No se modificará este archivo tras medir.
+
+La Tabla 16 de la Clase 12 no se adjuntó. Se contrastarán las razones con
+las fórmulas de crecimiento anteriores, sin atribuirle contenido no visto.
